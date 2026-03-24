@@ -65,10 +65,20 @@ def generate_blog_content(transcript_text: str, client: genai.Client) -> dict | 
     prompt = f"""
 당신은 유튜브 자막을 단순히 요약하는 AI가 아니라, '9년 차 베테랑 PLC 제어 및 전기 설계 엔지니어'의 시각으로 기술을 분석하는 전문가입니다.
 
-[JSON 포맷 주의사항]
-1. 응답은 반드시 완벽한 JSON 형식이어야 합니다.
-2. "content" 필드 내에서 마크다운 줄바꿈(엔터)을 표현할 때는 절대 실제 엔터 키(Newline)를 치지 말고, 반드시 자바스크립트 이스케이프 문자인 `\\n\\n` 을 텍스트로 직접 명시하여 문단 구분이 되도록 하십시오. (예: "첫번째 문단입니다.\\n\\n두번째 문단입니다.")
-3. 절대로 JSON 문자열 내부에서 실제 줄바꿈을 사용하지 마십시오.
+[응답 포맷 및 출력 방식]
+전체 응답을 하나의 JSON으로 묶지 말고, 반드시 아래 예시처럼 가장 먼저 메타데이터를 담은 JSON 코드 블록(```json ... ```)을 작성한 뒤, 그 아래에 마크다운(Markdown) 포스팅 본문을 순수 텍스트로 자유롭게 이어서 작성하십시오. 이렇게 하면 마크다운 본문 내에서 줄바꿈(\n)을 자유롭게 사용할 수 있습니다.
+
+예시 포맷:
+```json
+{{
+  "title": "포스팅 제목",
+  "description": "150자 이내의 요약 설명 (줄바꿈 없이)",
+  "tags": ["태그1", "태그2"],
+  "image_prompt_1": "첫번째 이미지 영문 핵심 키워드 (예: robot, network)",
+  "image_prompt_2": "두번째 이미지 영문 핵심 키워드 (예: factory, cyber)"
+}}
+```
+본문(Markdown) 시작...
 
 아래 주어진 유튜브 영상 자막 스크립트를 분석하여 블로그 포스팅을 작성해주세요.
 
@@ -102,15 +112,31 @@ def generate_blog_content(transcript_text: str, client: genai.Client) -> dict | 
             config=types.GenerateContentConfig(
                 temperature=0.7,
                 max_output_tokens=8192,
-                response_mime_type="application/json",
-                response_schema=BlogPost,
             )
         )
-        return json.loads(response.text, strict=False)
+        
+        text = response.text
+        # JSON 블록 추출
+        json_match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
+        if not json_match:
+            print("[ERROR] 메타데이터 JSON 블록을 응답에서 찾을 수 없습니다.")
+            print(f"[DEBUG] 원본 응답:\n{text[:500]}...")
+            return None
+            
+        meta = json.loads(json_match.group(1), strict=False)
+        content = text[json_match.end():].strip()
+        
+        # 이전 BlogPost 구조와 동일한 딕셔너리 반환
+        return {
+            "title": meta.get("title", "제목 없음"),
+            "description": meta.get("description", ""),
+            "tags": meta.get("tags", []),
+            "image_prompt_1": meta.get("image_prompt_1", "automation"),
+            "image_prompt_2": meta.get("image_prompt_2", "technology"),
+            "content": content
+        }
     except json.JSONDecodeError as e:
-         print(f"[ERROR] JSON 파싱 실패: {e}")
-         print(f"[DEBUG] 원본 응답:\n{response.text}")
-         return None
+         print(f"[ERROR] 메타데이터 JSON 블록 파싱 실패: {e}")
     except Exception as e:
         print(f"[ERROR] 블로그 컨텐츠 생성 실패: {e}")
         return None
