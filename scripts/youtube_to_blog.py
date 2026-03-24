@@ -75,7 +75,7 @@ def generate_blog_content(transcript_text: str, client: genai.Client) -> dict | 
 5. 강력한 결론: 반드시 기술적 요약과 함께 명확한 결론(Conclusion)으로 글을 마무리할 것.
 
 [구조 및 SEO 제약사항]
-1. [Frontmatter]: 제목(title), 설명(description), 태그(tags) 정보를 포함하세요.
+1. [Frontmatter]: 제목(title), 설명(description), 태그(tags) 정보를 포함하세요. (주의: description은 절대 줄바꿈을 포함하지 말고 150자 이내의 단일 문단으로 작성하세요.)
 2. [Hooks]: 가장 첫 줄은 독자의 이목을 단숨에 끌 수 있는 150자 내외의 단호하고 흥미로운 후킹 문구로 시작하세요. 가벼운 어투 대신 기술적 호기심을 지적으로 자극해야 합니다.
 3. [Table of Contents]: 초기 후킹 문구 바로 다음에 '## 목차' 섹션을 반드시 만들어주세요. 목차는 본문의 중제목(##)과 소제목(###)을 계층 구조의 리스트(불렛 포인트) 형태로 구성하십시오. 각 목차 항목은 클릭 시 해당 위치로 이동할 수 있도록 마크다운 앵커 링크([제목](#제목-텍스트)) 형식으로 작성하십시오.
 4. [Heading]: H2(##), H3(###) 구조를 통해 내용을 SEO에 맞게 논리적이고 깔끔하게 분리하세요. H1(#)은 외부 타이틀이 되므로 본문에서 제외하세요.
@@ -101,7 +101,7 @@ def generate_blog_content(transcript_text: str, client: genai.Client) -> dict | 
                 response_schema=BlogPost,
             )
         )
-        return json.loads(response.text)
+        return json.loads(response.text, strict=False)
     except json.JSONDecodeError as e:
          print(f"[ERROR] JSON 파싱 실패: {e}")
          print(f"[DEBUG] 원본 응답:\n{response.text}")
