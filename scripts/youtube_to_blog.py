@@ -233,7 +233,7 @@ def main(video_url: str) -> None:
     md_filename = f"{today_str}-{slug}.md"
     md_filepath = os.path.join(blog_dir, md_filename)
     
-    pub_datetime = datetime.now().isoformat()
+    pub_datetime = datetime.now().strftime("%Y-%m-%dT%H:%M:%S+09:00")
     
     frontmatter = f"""---
 title: "{blog_data['title']}"

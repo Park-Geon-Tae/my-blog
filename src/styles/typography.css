@@ -31,8 +31,8 @@
       @apply wrap-break-word text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
     }
 
-    ul {
-      @apply overflow-x-clip;
+    ul, ol {
+      @apply overflow-x-clip text-[0.95em] leading-snug;
     }
 
     li {
