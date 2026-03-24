@@ -79,9 +79,7 @@ def generate_blog_content(transcript_text: str, client: genai.Client) -> dict | 
 2. [Hooks]: 가장 첫 줄은 독자의 이목을 단숨에 끌 수 있는 150자 내외의 단호하고 흥미로운 후킹 문구로 시작하세요. 가벼운 어투 대신 기술적 호기심을 지적으로 자극해야 합니다.
 3. [Table of Contents]: 초기 후킹 문구 바로 다음에 '## 목차' 섹션을 반드시 만들어주세요. 목차는 본문의 중제목(##)과 소제목(###)을 계층 구조의 리스트(불렛 포인트) 형태로 구성하십시오. 각 목차 항목은 클릭 시 해당 위치로 이동할 수 있도록 마크다운 앵커 링크([제목](#제목-텍스트)) 형식으로 작성하십시오.
 4. [Heading]: H2(##), H3(###) 구조를 통해 내용을 SEO에 맞게 논리적이고 깔끔하게 분리하세요. H1(#)은 외부 타이틀이 되므로 본문에서 제외하세요.
-5. [Images]: 글의 중간중간 이해를 돕거나 썸네일로 쓸 만한 위치 2곳에 정확히 문자열 `{{IMAGE_1}}`과 `{{IMAGE_2}}`를 삽입하세요.
-6. [Image Prompts]: 해당 2장의 AI 이미지를 생성하기 위한 영문 프롬프트(Imagen 3 모델 용도) 2개를 작성하세요. 프롬프트는 미래지향적, 깔끔한 기술 블로그 테마, 사이버펑크 또는 모던 오피스 스타일로 작성하세요.
-7. [Teaser & Closing]: 글의 맨 마지막 섹션에 '다음 리포트 예고' 항목을 만들어주세요. 자막 전체 맥락을 파악해 '다음에는 이와 관련된 어떤 심화 주제나 실무 팁을 다룰 것인지' 1~2문장으로 임팩트 있게 작성하십시오. 추가로 그 밑에는 반드시 "오늘의 분석이 현장 업무에 도움이 되길 바랍니다. Mr.FIX였습니다."라는 고정 멘트로 깔끔하게 클로징하십시오.
+8. [Image Prompts]: 해당 2장의 이미지를 대체할 무료 이미지 검색용 '1~2개의 영문 핵심 키워드'를 각각 작성하세요. (예: robot, cyber, factory, network 등). 본문 내용과 가장 연관성 높은 단순한 명사 형태로 띄어쓰기 없이 작성해야 합니다.
 
 [유튜브 자막 스크립트]
 {safe_transcript}
@@ -123,25 +121,20 @@ def generate_and_save_image(client: genai.Client, prompt: str, output_path: str)
     print(f"[INFO] 프롬프트: '{prompt}'")
     print(f"[INFO] 저장 예정 절대 경로: {os.path.abspath(output_path)}")
     try:
-        # 안전한 URL 파라미터를 위해 프롬프트 인코딩
-        encoded_prompt = urllib.parse.quote(prompt)
-        # 16:9 비율(1024x576)과 워터마크 제거(nologo) 파라미터 지정
-        image_url = f"https://pollinations.ai/p/{encoded_prompt}?width=1024&height=576&nologo=true"
+        # 안전한 URL 파라미터를 위해 띄어쓰기를 콤마로 변경 및 인코딩 (LoremFlickr 방식)
+        safe_keyword = urllib.parse.quote(prompt.replace(' ', ','))
+        # 무작위 이미지 대신 주제와 연관된 이미지를 반환하는 무료 서비스 사용
+        image_url = f"https://loremflickr.com/1024/576/{safe_keyword}"
         
-        # 파일 저장 (403 Forbidden 봇 차단 방지를 위해 User-Agent 명시)
+        # 파일 저장
         abs_output_path = os.path.abspath(output_path)
         req = urllib.request.Request(
             image_url, 
-            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+            headers={'User-Agent': 'Mozilla/5.0'}
         )
         with urllib.request.urlopen(req) as response:
-            content_type = response.info().get_content_type()
-            if 'html' in content_type:
-                print(f"[WARNING] Pollinations API가 HTML(방어 페이지)을 반환했습니다. 마크다운 에러 방지를 위해 임시 더미 이미지로 대체합니다.")
-                urllib.request.urlretrieve("https://picsum.photos/1024/576", abs_output_path)
-            else:
-                with open(abs_output_path, 'wb') as out_file:
-                    out_file.write(response.read())
+            with open(abs_output_path, 'wb') as out_file:
+                out_file.write(response.read())
         
         # 물리적 파일 생성 검증
         if os.path.exists(abs_output_path):
