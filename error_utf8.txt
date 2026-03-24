@@ -1,0 +1,55 @@
+﻿python : Traceback (mos
+t recent call last):
+위치 줄:1 문자:1
++ python scripts/youtub
+e_to_blog.py "https://y
+outu.be/-oRM42KaYBM?si=
+XV ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Traceback (mo   
+ st recent call las    
+t)::String) [], Re    m
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  File "C:\PGT\my-blog\
+scripts\youtube_to_blog
+.py", line 297, in <mod
+ule>
+    main(sys.argv[1])
+    ~~~~^^^^^^^^^^^^^
+  File "C:\PGT\my-blog\
+scripts\youtube_to_blog
+.py", line 215, in main
+    blog_data = generat
+e_blog_content(transcri
+pt, client)
+  File "C:\PGT\my-blog\
+scripts\youtube_to_blog
+.py", line 73, in gener
+ate_blog_content
+    {
+    ...<5 lines>...
+    }
+ValueError: Invalid for
+mat specifier ' "포스팅 제목
+",
+  "description": "150자 
+이내의 요약 설명 (줄바꿈 없이)",
+  "tags": ["태그1", "태그2"
+],
+  "image_prompt_1": "첫번
+째 이미지 영문 핵심 키워드 (예: rob
+ot, network)",
+  "image_prompt_2": "두번
+째 이미지 영문 핵심 키워드 (예: fac
+tory, cyber)"
+' for object of type 's
+tr'
