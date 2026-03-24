@@ -3,7 +3,7 @@ export const SITE = {
   author: "Mr.FIX",
   profile: "https://satnaing.dev/",
   desc: "Mr.FIX의 꼼꼼하고 유용한 자동화 설정 및 기록들을 공유합니다.",
-  title: "Mr.FIX의 자동화 로그",
+  title: "Mr.FIX의 자동화 블로그",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
