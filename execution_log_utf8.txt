@@ -1,0 +1,331 @@
+﻿venv\Scripts\python : T
+raceback (most recent c
+all last):
+위치 줄:1 문자:1
++ venv\Scripts\python s
+cripts\youtube_to_blog.
+py "https://www.youtube
+.c ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Traceback (mo   
+ st recent call las    
+t)::String) [], Re    m
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  File "C:\PGT\my-blog\
+scripts\youtube_to_blog
+.py", line 116, in gene
+rate_and_save_image
+    result = client.mod
+els.generate_images(
+        model=model_nam
+e,
+    ...<5 lines>...
+        )
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\models.py"
+, line 6134, in generat
+e_images
+    api_response = self
+._generate_images(
+        model=model,
+        prompt=prompt,
+        config=config,
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\models.py"
+, line 4801, in _genera
+te_images
+    response = self._ap
+i_client.request(
+        'post', path, r
+equest_dict, http_optio
+ns
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1402, in re
+quest
+    response = self._re
+quest(http_request, htt
+p_options, stream=False
+)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1238, in _r
+equest
+    return self._retry(
+self._request_once, htt
+p_request, stream)  # t
+ype: ignore[no-any-retu
+rn]
+           ~~~~~~~~~~~^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 470, in __call__
+    do = self.iter(retr
+y_state=retry_state)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 371, in iter
+    result = action(ret
+ry_state)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 413, in exc_check
+    raise retry_exc.rer
+aise()
+          ~~~~~~~~~~~~~
+~~~~^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 184, in reraise
+    raise self.last_att
+empt.result()
+          ~~~~~~~~~~~~~
+~~~~~~~~~~~^^
+  File "C:\Users\user\A
+ppData\Local\Programs\P
+ython\Python314\Lib\con
+current\futures\_base.p
+y", line 443, in result
+    return self.__get_r
+esult()
+           ~~~~~~~~~~~~
+~~~~~^^
+  File "C:\Users\user\A
+ppData\Local\Programs\P
+ython\Python314\Lib\con
+current\futures\_base.p
+y", line 395, in __get_
+result
+    raise self._excepti
+on
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 473, in __call__
+    result = fn(*args, 
+**kwargs)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1215, in _r
+equest_once
+    errors.APIError.rai
+se_for_response(respons
+e)
+    ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~^^^^^^^^
+^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\errors.py"
+, line 134, in raise_fo
+r_response
+    cls.raise_error(res
+ponse.status_code, resp
+onse_json, response)
+    ~~~~~~~~~~~~~~~^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\errors.py"
+, line 159, in raise_er
+ror
+    raise ClientError(s
+tatus_code, response_js
+on, response)
+google.genai.errors.Cli
+entError: 400 INVALID_A
+RGUMENT. {'error': {'co
+de': 400, 'message': 'I
+magen 3 is only availab
+le on paid plans. Pleas
+e upgrade your account 
+at https://ai.dev/proje
+cts.', 'status': 'INVAL
+ID_ARGUMENT'}}
+Traceback (most recent 
+call last):
+  File "C:\PGT\my-blog\
+scripts\youtube_to_blog
+.py", line 116, in gene
+rate_and_save_image
+    result = client.mod
+els.generate_images(
+        model=model_nam
+e,
+    ...<5 lines>...
+        )
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\models.py"
+, line 6134, in generat
+e_images
+    api_response = self
+._generate_images(
+        model=model,
+        prompt=prompt,
+        config=config,
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\models.py"
+, line 4801, in _genera
+te_images
+    response = self._ap
+i_client.request(
+        'post', path, r
+equest_dict, http_optio
+ns
+    )
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1402, in re
+quest
+    response = self._re
+quest(http_request, htt
+p_options, stream=False
+)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1238, in _r
+equest
+    return self._retry(
+self._request_once, htt
+p_request, stream)  # t
+ype: ignore[no-any-retu
+rn]
+           ~~~~~~~~~~~^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 470, in __call__
+    do = self.iter(retr
+y_state=retry_state)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 371, in iter
+    result = action(ret
+ry_state)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 413, in exc_check
+    raise retry_exc.rer
+aise()
+          ~~~~~~~~~~~~~
+~~~~^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 184, in reraise
+    raise self.last_att
+empt.result()
+          ~~~~~~~~~~~~~
+~~~~~~~~~~~^^
+  File "C:\Users\user\A
+ppData\Local\Programs\P
+ython\Python314\Lib\con
+current\futures\_base.p
+y", line 443, in result
+    return self.__get_r
+esult()
+           ~~~~~~~~~~~~
+~~~~~^^
+  File "C:\Users\user\A
+ppData\Local\Programs\P
+ython\Python314\Lib\con
+current\futures\_base.p
+y", line 395, in __get_
+result
+    raise self._excepti
+on
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+tenacity\__init__.py", 
+line 473, in __call__
+    result = fn(*args, 
+**kwargs)
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\_api_clien
+t.py", line 1215, in _r
+equest_once
+    errors.APIError.rai
+se_for_response(respons
+e)
+    ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~^^^^^^^^
+^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\errors.py"
+, line 134, in raise_fo
+r_response
+    cls.raise_error(res
+ponse.status_code, resp
+onse_json, response)
+    ~~~~~~~~~~~~~~~^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\PGT\my-blog\
+venv\Lib\site-packages\
+google\genai\errors.py"
+, line 159, in raise_er
+ror
+    raise ClientError(s
+tatus_code, response_js
+on, response)
+google.genai.errors.Cli
+entError: 400 INVALID_A
+RGUMENT. {'error': {'co
+de': 400, 'message': 'I
+magen 3 is only availab
+le on paid plans. Pleas
+e upgrade your account 
+at https://ai.dev/proje
+cts.', 'status': 'INVAL
+ID_ARGUMENT'}}
+[INFO] Gemini에 포스팅 작성을 요청합니다...
+[INFO] 선택된 텍스트 모델: gemini-2.5-flash
+[INFO] 이미지 1 파일 경로 (os.path.join): C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img1.jpg
+[INFO] 이미지 생성 요청 중... 프롬프트: 'A futuristic, minimalist office setting with a holographic display showing abstract data points and graphs, but with a 'No Data Found' or 'Irrelevant Data' warning overlay. The aesthetic is clean, modern, and high-tech, with subtle cyberpunk elements like glowing lines on desks. Focus on a professional, analytical atmosphere.'
+[INFO] 저장 예정 절대 경로: C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img1.jpg
+[INFO] 선택된 이미지 모델: imagen-4.0-generate-001
+[ERROR] 이미지 생성 중 예외 발생: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Imagen 3 is only available on paid plans. Please upgrade your account at https://ai.dev/projects.', 'status': 'INVALID_ARGUMENT'}}
+[WARNING] 이미지 1 저장/생성 실패! (C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img1.jpg)
+[INFO] 이미지 2 파일 경로 (os.path.join): C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img2.jpg
+[INFO] 이미지 생성 요청 중... 프롬프트: 'A highly detailed, modern industrial control room with multiple large screens displaying complex PLC ladder logic, electrical schematics, and real-time operational data. The room is sleek and organized, with a focus on precision and efficiency. Cyberpunk lighting accents and a clean, professional engineering environment. A lone engineer is observing the screens, representing deep technical analysis.'
+[INFO] 저장 예정 절대 경로: C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img2.jpg
+[INFO] 선택된 이미지 모델: imagen-4.0-generate-001
+[ERROR] 이미지 생성 중 예외 발생: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Imagen 3 is only available on paid plans. Please upgrade your account at https://ai.dev/projects.', 'status': 'INVALID_ARGUMENT'}}
+[WARNING] 이미지 2 저장/생성 실패! (C:\PGT\my-blog\src\assets\images\2026-03-24-fwvyzx\2026-03-24-img2.jpg)
+[SUCCESS] 블로그 포스팅이 성공적으로 작성되었습니다: C:\PGT\my-blog\src\data\blog\2026-03-24-입력-스크립트-분석-보고서-기술적-데이터-부재에-대한-평가.md
